@@ -40,3 +40,13 @@ bool Socket::Bind(int port) {
 	}
 	return true;
 }
+
+bool Socket::Listen(int backlog) {
+	int result = listen(m_socket, backlog);
+
+	if (result == SOCKET_ERROR) {
+		std::cerr << "Listen failed with error: " << WSAGetLastError() << std::endl;
+		return false;
+	}
+	return true;
+}

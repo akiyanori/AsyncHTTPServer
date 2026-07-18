@@ -12,7 +12,7 @@ public:
 
 	bool Create();
 	bool Bind(int port);
-	bool Listen();
+	bool Listen(int backlog = SOMAXCONN);
 
 private:
 	SOCKET m_socket;
