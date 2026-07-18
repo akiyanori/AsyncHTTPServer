@@ -25,3 +25,18 @@ bool Socket::Create() {
 	}
 	return true;
 }
+
+bool Socket::Bind(int port) {
+	sockaddr_in service;
+	service.sin_family = AF_INET;
+	service.sin_addr.s_addr = INADDR_ANY;
+	service.sin_port = htons(port);
+
+	int result = bind(m_socket, reinterpret_cast<SOCKADDR*>(&service), sizeof(service));
+
+	if (result == SOCKET_ERROR) {
+		std::cerr << "Bind failed with error: " << WSAGetLastError() << std::endl;
+		return false;
+	}
+	return true;
+}
